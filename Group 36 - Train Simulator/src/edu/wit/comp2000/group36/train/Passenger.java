@@ -16,7 +16,6 @@ public class Passenger {
 	private Station end;
 	private static int nextID = 1;
 	private static int ID;
-	private boolean isInbound; //TODO: calculate isInbound
 	private boolean initialized = false;
 	
 	/**
@@ -35,15 +34,6 @@ public class Passenger {
 		initialized = true;
 	}
 	
-	/**
-	 * Checks the direction of the train
-	 * @return if it's inbound, true. if it's outbound, false.
-	 **/
-	public boolean IsInbound() {
-		checkInitialization();
-		return isInbound;
-	}
-	
 	private void checkInitialization() {
 		if ( !initialized )
 		{
@@ -56,6 +46,7 @@ public class Passenger {
 	 * @return
 	 **/
 	public int getID() {
+		checkInitialization();
 		return ID;
 	}
 	
@@ -65,6 +56,7 @@ public class Passenger {
 	 * @return
 	 **/
 	public Station getStart() {
+		checkInitialization();
 		return start;
 	}
 	
@@ -74,6 +66,7 @@ public class Passenger {
 	 * @return
 	 **/
 	public Station getEnd() {
+		checkInitialization();
 		return end;
 	}
 	
@@ -82,22 +75,15 @@ public class Passenger {
 	 **/
 	public String toString() {
 		String result = " ";
-		result += "Ticket Itinerary:";
 		result += "Passenger " + ID + "\t";
 		result += "Station coming from is " + start.getLocation() + "\t";
 		result += "Station they're going to is " + end.getLocation() + "\t";
-		result += "IsInbound.";
 		return result;
 	}
 	
+	
+	@SuppressWarnings("resource")
 	public static void main(String[]args) {
-		Scanner s = new Scanner(System.in);
-		
-		System.out.print("Enter passenger ID to see itinerary: ");
-		ID = s.nextInt();
-		
-
-		
 		
 	}
 }
