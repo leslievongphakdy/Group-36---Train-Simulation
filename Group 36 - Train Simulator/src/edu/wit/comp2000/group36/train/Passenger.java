@@ -1,5 +1,7 @@
 package edu.wit.comp2000.group36.train;
 
+import java.nio.IntBuffer;
+
 /**
  * @author Leslie Vongphakdy
  * COMP 2000 - 03
@@ -14,28 +16,30 @@ public class Passenger {
 	private static Station end;
 	private static int nextID = 1;
 	private static int ID;
-	private boolean initialized = false;
+	private static boolean initialized = false;
 	
 	/**
 	 * Gives every passenger a number id (aka their name).
 	 * Parameters start and destination set where the passenger 
 	 * is coming from and where they are going.
 	 * @param ID
-	 * @param start
+	 * @param i
+	 * @param end 
 	 * @param end 
 	 **/
-	public Passenger(Station start, Station end) {
-		ID = nextID;
+	@SuppressWarnings("static-access")
+	public Passenger(int i, Station start, Station end) {
+		setID(nextID);
 		nextID++;
 		this.start = start;
 		this.end = end;
 		initialized = true;
-		Logger.logging("Train is coming from " + start);
+		Logger.logging("Train is coming from " + i);
 		Logger.logging("Train is going to " + end);
 		
 	}
 	
-	private void checkInitialization() {
+	private static void checkInitialization() {
 		if ( !initialized )
 		{
 			throw new SecurityException( "Train is not inbound." ) ;
@@ -44,9 +48,10 @@ public class Passenger {
 	
 	/**
 	 * Calls and then returns id for passenger.
+	 * @param ID 
 	 * @return
 	 **/
-	public int getID() {
+	public static int getID(int ID) {
 		checkInitialization();
 		return ID;
 	}
@@ -73,14 +78,31 @@ public class Passenger {
 	
 	/**
 	 *  sets up output for Passenger's itinerary
+	 * @param i 
 	 **/
-	public String toString() {
+	public static String toString(int ID) {
 		String result = " ";
 		result += "Passenger " + ID;
 		return result;
 	}
 	
 	public static void main(String[]args) {
-		
+		System.out.println("Testing Passenger Class");
+		Passenger p = null;
+		testGetters(p);
+	}
+
+	private static void testGetters(Passenger p) {
+		// TODO Auto-generated method stub
+		p = new Passenger(2, new Station(2), new Station(5));
+		System.out.print(toString(getID(2)) + " " + p);
+	}
+
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
 	}
 }
