@@ -34,8 +34,8 @@ public class Passenger {
 		this.start = start;
 		this.end = end;
 		initialized = true;
-		Logger.logging("Train is coming from " + i);
-		Logger.logging("Train is going to " + end);
+		Logger.logging("Passenger " + ID + " is coming from " + i);
+		Logger.logging("Pasenger " + ID + " is going to " + end);
 		
 	}
 	
